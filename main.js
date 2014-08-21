@@ -10,22 +10,21 @@ var email_inp=document.getElementById("emailText");
 if (email_data =="" && name_data == "")
 {
             name_inp.className='errorBorders';
-            name_inp.getAttributeNode('placeholder').value="Имя должно содержать минимум 3 символа";
+            name_inp.getAttributeNode('placeholder').value="РРјСЏ РґРѕР»Р¶РЅРѕ СЃРѕРґРµСЂР¶Р°С‚СЊ РјРёРЅРёРјСѓРј 3 СЃРёРјРІРѕР»Р°";
             email_inp.className='errorBorders';
-            email_inp.getAttributeNode('placeholder').value="Поле E-mail должно содержать @";
+            email_inp.getAttributeNode('placeholder').value="РџРѕР»Рµ E-mail РґРѕР»Р¶РЅРѕ СЃРѕРґРµСЂР¶Р°С‚СЊ @";
 }
 else if(name_data.length<3)
         {   
             name_inp.className='errorBorders';
-            name_inp.value="Имя должно содержать минимум 3 символа";
+            name_inp.value="РРјСЏ РґРѕР»Р¶РЅРѕ СЃРѕРґРµСЂР¶Р°С‚СЊ РјРёРЅРёРјСѓРј 3 СЃРёРјРІРѕР»Р°";
            }
 else if (email_data.search(emailRegExp)) {
      
             email_inp.className='errorBorders';
-            email_inp.value="Поле E-mail должно содержать @";   
-    alert('Поле E-mail должно содержать @');
-    }
- else{
+            email_inp.value="РџРѕР»Рµ E-mail РґРѕР»Р¶РЅРѕ СЃРѕРґРµСЂР¶Р°С‚СЊ @";
+            }
+else{
         
 var new_div=document.createElement('div');
 var message_p=document.createElement('p');
