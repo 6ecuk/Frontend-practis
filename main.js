@@ -1,4 +1,4 @@
-var emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/;
+var  emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/;
 function Forms(nameFormData, emailFormData) {
  this.nameForm = nameFormData;
  this.emailForm = emailFormData;
