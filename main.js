@@ -1,39 +1,62 @@
-window.onload= function (){
-
-document.getElementById("button").onclick=function(){
-var emailRegExp = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/ ;   
-var email_data=document.getElementById("emailText").value;
-var name_data=document.getElementById("nameText").value;
-var message_data=document.getElementById("messageText").value;
-var name_inp=document.getElementById("nameText");
-var email_inp=document.getElementById("emailText");    
-if (email_data =="" && name_data == "")
-{
-            name_inp.className='errorBorders';
-            name_inp.getAttributeNode('placeholder').value="Имя должно содержать минимум 3 символа";
-            email_inp.className='errorBorders';
-            email_inp.getAttributeNode('placeholder').value="Поле E-mail должно содержать @";
+var  emailPattern = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/;
+function Forms(nameFormData, emailFormData) {
+ this.nameForm = nameFormData;
+ this.emailForm = emailFormData;
 }
-else if(name_data.length<3)
-        {   
-            name_inp.className='errorBorders';
-            name_inp.value="Имя должно содержать минимум 3 символа";
-           }
-else if (email_data.search(emailRegExp)) {
-     
-            email_inp.className='errorBorders';
-            email_inp.value="Поле E-mail должно содержать @";
-            }
-else{
-        
-var new_div=document.createElement('div');
-var message_p=document.createElement('p');
-message_p.className=message_p.className+'message_p'; 
-new_div.className=new_div.className+'messageView';   
-var parent_div=document.getElementById("messageBox");
-parent_div.insertBefore(new_div,parent_div.firstChild);     
-new_div.appendChild(message_p);
-message_p.innerHTML=message_data;      
+function Ticket(emailData, nameData, messageData) {
+
+    this.email = emailData;
+    this.name = nameData;
+    this.message = messageData;
+    this.div = document.createElement('div');
+    this.p = document.createElement('p');
+    this.parrentDiv = document.getElementById('messageBox');
+    this.div.className = 'messageView';
+    this.p.className = 'message_p';
+    this.p.innerHTML = this.message;
+    this.div.appendChild(this.p);
+    this.parrentDiv.insertBefore(this.div, this.parrentDiv.firstChild);
+}
+function createObjects() {
+    forms = new Forms(
+        document.getElementById("nameText"),
+        document.getElementById("emailText")
+    );
+
+    if (forms.nameForm.value === "" && forms.emailForm.value === "" )
+    {
+        forms.nameForm.className = 'errorBorders';
+        forms.nameForm.placeholder = "Поле Имя не должно быть пустым";
+        forms.emailForm.className = 'errorBorders';
+        forms.emailForm.placeholder = "Поле E-mail не должно быть пустым";
     }
-    };
+    else if (forms.nameForm.value === "") {
+        forms.nameForm.className = 'errorBorders';
+        forms.nameForm.placeholder = "Поле Имя не должно быть пустым";
+    }
+    else if (forms.emailForm.value === "") {
+        forms.emailForm.className = 'errorBorders';
+        forms.emailForm.placeholder = "Поле E-mail не должно быть пустым";
+    }
+    else if (forms.emailForm.value.search(emailPattern) < 0) {
+        forms.emailForm.className = 'errorBorders';
+        forms.emailForm.value = "Поле E-mail должно содержать @";
+    }
+    else if (forms.nameForm.value.length < 3) {
+        forms.nameForm.className = 'errorBorders';
+        forms.nameForm.value = "Имя должно содержать более 3 символов";
+    }
+else {
+    ticket = new Ticket(
+        document.getElementById("emailText").value,
+        document.getElementById("nameText").value,
+        document.getElementById("messageText").value
+    );
+
+    }
+}
+
+window.onload = function () {
+document.getElementById('button').onclick = createObjects;
+
 };
